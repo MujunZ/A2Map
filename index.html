@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>MJ's A2 Map</title>
+</head>
+<body>
+	<input data-bind="">
+	<ul data-bind="foreach:locationList">
+		<li data-bind="text: title"></li>
+	</ul>
+	<script type="text/javascript" src = "js/lib/knockout-3.4.1.js"></script>
+	<script type="text/javascript">
+		var locations = [{
+               title:'Godaiko Japanese Restaurant',
+               location:{
+                  lat:42.2409745,
+                  lng:-83.7698831
+               },
+               content:'First Date!'
+            },
+            {
+               title:'Pita Pita',
+               location:{
+                  lat:42.248919,
+                  lng:-83.654703
+               },
+               content:'Faverate Restaruant'
+            },
+            {
+               title:'Chia Shiang',
+               location:{
+                  lat:42.2571668,
+                  lng:-83.7299455
+               },
+               content:'Blacklist'
+            }
+      	];
+
+      	//@constructor
+      	var Location = function (data) {
+      		this.title = ko.observable(data.title);
+      	};
+
+      	//ViewModel for KnockOut
+      	var ViewModel = function () {
+      		this.test = ko.observable('test');
+      		//Always use self=this in KO ViewModel to avoid further complexity
+      		var self = this;
+      		//make location list
+      		self.locationList = ko.observableArray([]);
+      		locations.forEach( function(locationItem) {
+      			self.locationList.push(new Location(locationItem));
+      		});
+      	};
+
+      	ko.applyBindings(new ViewModel());
+	</script>
+</body>
+</html>
