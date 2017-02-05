@@ -7,9 +7,9 @@
 <body>
 	<input class="inputbox" id="searchbox" data-bind="textInput: searchText">
    <p class="test" data-bind="text: searchText"></p>
-   <p class="test" data-bind="text: match"></p>
+   <p class="test" data-bind="text: locationList()[0].match"></p>
 	<ul class="locationListBox" data-bind="foreach:locationList">
-		<li class="locationBox" data-bind="text: title"></li>
+		<li class="locationBox" data-bind="text: title, visible:isVisible"></li>
 	</ul>
 	<script type="text/javascript" src = "js/lib/knockout-3.4.1.js"></script>
 	<script type="text/javascript">
@@ -19,7 +19,9 @@
                   lat:42.2409745,
                   lng:-83.7698831
                },
-               content:'First Dinner!'
+               content:'First Dinner!',
+               match: null,
+
             },
             {
                title:'Pita Pita',
@@ -27,7 +29,8 @@
                   lat:42.248919,
                   lng:-83.654703
                },
-               content:'Faverate Restaruant'
+               content:'Faverate Restaruant',
+               match: null
             },
             {
                title:'Chia Shiang',
@@ -35,7 +38,8 @@
                   lat:42.2571668,
                   lng:-83.7299455
                },
-               content:'Blacklist'
+               content:'Blacklist',
+               match: null
             }
       	];
 
@@ -43,6 +47,8 @@
       	var Location = function (data) {
       		this.title = ko.observable(data.title);
             this.location = ko.observable(data.location);
+            this.match = ko.observable(data.match);
+            this.isVisible = ko.observable(true);
       	};
 
       	//ViewModel for KnockOut
@@ -56,15 +62,34 @@
       			self.locationList.push(new Location(locationItem));
       		});
 
-            self.searchText = ko.observable('Winter');
-            self.searchKey = ko.observable(new RegExp(self.searchText(), 'gi'));
-            self.match = ko.observable(self.locationList()[0].title().match(self.searchKey()));
-            console.log(self.match);
-            if (self.match != null) {
-               console.log('good');
-            }else {
-               console.log('No match');
-            }
+            //input text
+            self.searchText = ko.observable('');
+
+            //prepare the searchKey for .match()
+            self.searchKey = ko.computed(function(){
+               return new RegExp(self.searchText(), 'gi')
+            },this);
+
+            //match the searchKey in every locationList item
+            self.locationList()[0].match = ko.computed(function(){
+               return self.locationList()[0].title().match(self.searchKey());
+            },this);
+
+            //first item disappears if it matches the searchKey
+            self.search = ko.computed(function () {
+               if (self.locationList()[0].match != null) {
+                  console.log('good');
+               }else {
+                  self.locationList()[0].isVisible(false);
+               };
+            },this);
+            
+
+            // for(var i = 0, length1 = self.locationList.length; i < length1; i++){
+            //    self.locationList[i].match = ko.computed(function () {
+            //       self.locationList()[i].title().match(self.searchKey());
+            //    },this);
+            // };
       	};
 
       	ko.applyBindings(new ViewModel());
