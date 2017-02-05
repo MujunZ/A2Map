@@ -5,9 +5,11 @@
 	<title>MJ's A2 Map</title>
 </head>
 <body>
-	<input data-bind="">
-	<ul data-bind="foreach:locationList">
-		<li data-bind="text: title"></li>
+	<input class="inputbox" id="searchbox" data-bind="textInput: searchText">
+   <p class="test" data-bind="text: searchText"></p>
+   <p class="test" data-bind="text: match"></p>
+	<ul class="locationListBox" data-bind="foreach:locationList">
+		<li class="locationBox" data-bind="text: title"></li>
 	</ul>
 	<script type="text/javascript" src = "js/lib/knockout-3.4.1.js"></script>
 	<script type="text/javascript">
@@ -17,7 +19,7 @@
                   lat:42.2409745,
                   lng:-83.7698831
                },
-               content:'First Date!'
+               content:'First Dinner!'
             },
             {
                title:'Pita Pita',
@@ -40,18 +42,29 @@
       	//@constructor
       	var Location = function (data) {
       		this.title = ko.observable(data.title);
+            this.location = ko.observable(data.location);
       	};
 
       	//ViewModel for KnockOut
       	var ViewModel = function () {
-      		this.test = ko.observable('test');
       		//Always use self=this in KO ViewModel to avoid further complexity
       		var self = this;
+
       		//make location list
       		self.locationList = ko.observableArray([]);
       		locations.forEach( function(locationItem) {
       			self.locationList.push(new Location(locationItem));
       		});
+
+            self.searchText = ko.observable('Winter');
+            self.searchKey = ko.observable(new RegExp(self.searchText(), 'gi'));
+            self.match = ko.observable(self.locationList()[0].title().match(self.searchKey()));
+            console.log(self.match);
+            if (self.match != null) {
+               console.log('good');
+            }else {
+               console.log('No match');
+            }
       	};
 
       	ko.applyBindings(new ViewModel());
