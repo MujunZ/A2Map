@@ -19,9 +19,7 @@
                   lat:42.2409745,
                   lng:-83.7698831
                },
-               content:'First Dinner!',
-               match: null,
-
+               content:'First Dinner!'
             },
             {
                title:'Pita Pita',
@@ -29,8 +27,7 @@
                   lat:42.248919,
                   lng:-83.654703
                },
-               content:'Faverate Restaruant',
-               match: null
+               content:'Faverate Restaruant'
             },
             {
                title:'Chia Shiang',
@@ -38,8 +35,7 @@
                   lat:42.2571668,
                   lng:-83.7299455
                },
-               content:'Blacklist',
-               match: null
+               content:'Blacklist'
             }
       	];
 
@@ -47,7 +43,7 @@
       	var Location = function (data) {
       		this.title = ko.observable(data.title);
             this.location = ko.observable(data.location);
-            this.match = ko.observable(data.match);
+            this.match = ko.observable(-1);
             this.isVisible = ko.observable(true);
       	};
 
@@ -64,32 +60,18 @@
 
             //input text
             self.searchText = ko.observable('');
+            // self.locationList()[0].match = ko.computed(function () {
+            //    return self.locationList()[0].title().toLowerCase().indexOf(self.searchText());
+            // },this);
 
-            //prepare the searchKey for .match()
-            self.searchKey = ko.computed(function(){
-               return new RegExp(self.searchText(), 'gi')
-            },this);
-
-            //match the searchKey in every locationList item
-            self.locationList()[0].match = ko.computed(function(){
-               return self.locationList()[0].title().match(self.searchKey());
-            },this);
-
-            //first item disappears if it matches the searchKey
-            self.search = ko.computed(function () {
-               if (self.locationList()[0].match() != null) {
-                  self.locationList()[0].isVisible(true);
-               } else {
-                  self.locationList()[0].isVisible(false);
+            self.matchItem = ko.computed(function () {
+               for(var i = 0, length1 = self.locationList().length; i < length1; i++){
+                  self.locationList()[i].match = ko.computed(function () {
+                     return self.locationList()[i].title().toLowerCase().indexOf(self.searchText());
+                  },this);
                };
             },this);
-            
 
-            // for(var i = 0, length1 = self.locationList.length; i < length1; i++){
-            //    self.locationList[i].match = ko.computed(function () {
-            //       self.locationList()[i].title().match(self.searchKey());
-            //    },this);
-            // };
       	};
 
       	ko.applyBindings(new ViewModel());
