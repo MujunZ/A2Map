@@ -43,7 +43,7 @@
       	var Location = function (data) {
       		this.title = ko.observable(data.title);
             this.location = ko.observable(data.location);
-            this.match = ko.observable(-1);
+            //this.match = ko.observable(-1);
             this.isVisible = ko.observable(true);
       	};
 
@@ -60,15 +60,17 @@
 
             //input text
             self.searchText = ko.observable('');
-            // self.locationList()[0].match = ko.computed(function () {
-            //    return self.locationList()[0].title().toLowerCase().indexOf(self.searchText());
-            // },this);
 
-            self.matchItem = ko.computed(function () {
+            //match items
+            self.search = ko.computed(function () {
                for(var i = 0, length1 = self.locationList().length; i < length1; i++){
-                  self.locationList()[i].match = ko.computed(function () {
-                     return self.locationList()[i].title().toLowerCase().indexOf(self.searchText());
-                  },this);
+                  var match =  self.locationList()[i].title().toLowerCase().indexOf(self.searchText().toLowerCase()) != -1;
+                  if (!match) {
+                     self.locationList()[i].isVisible(false);
+                     console.log(self.locationList()[i].isVisible());
+                  }else {
+                     self.locationList()[i].isVisible(true);
+                  };
                };
             },this);
 
