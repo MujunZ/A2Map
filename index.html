@@ -77,9 +77,9 @@
 
             //first item disappears if it matches the searchKey
             self.search = ko.computed(function () {
-               if (self.locationList()[0].match != null) {
-                  console.log('good');
-               }else {
+               if (self.locationList()[0].match() != null) {
+                  self.locationList()[0].isVisible(true);
+               } else {
                   self.locationList()[0].isVisible(false);
                };
             },this);
