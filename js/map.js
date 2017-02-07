@@ -28,8 +28,9 @@ function initMap () {
   /*
   * @description make markers
   */
-  var defaultIcon = makeMarkerIcon('002FA7');
+  var defaultIcon = makeMarkerIcon('FF0080');
   var highlightedIcon = makeMarkerIcon('FFED00');
+  var minionIcon = "http://icons.iconarchive.com/icons/designbolts/despicable-me-2/48/Minion-Hello-icon.png";
 
   // draw markers ref: https://developers.google.com/maps/documentation/javascript/markers
   function makeMarkerIcon (markerColor) {
@@ -51,8 +52,8 @@ function initMap () {
     var marker = new google.maps.Marker({
       position: position,
       title: title,
-      // icon: 'http://icons.iconarchive.com/icons/designbolts/despicable-me-2/48/Minion-Hello-icon.png',
-      icon: defaultIcon,
+      icon: minionIcon,
+      //icon: defaultIcon,
       content: content,
       animation: google.maps.Animation.DROP,
       id: i
@@ -66,7 +67,7 @@ function initMap () {
       this.setIcon(highlightedIcon);
     });
     marker.addListener('mouseout', function () {
-      this.setIcon(defaultIcon);
+      this.setIcon(minionIcon);
     });
   };
 
@@ -83,10 +84,16 @@ function initMap () {
         markers[iCopy].setMap(map);
       };
     })(i));
+    locationBox[i].addEventListener('dblclick',(function (iCopy) {
+      return function () {
+        markers[iCopy].setMap(null);
+      };
+    })(i));
   };
 
   document.getElementById('show-listings').addEventListener('click',showlistings);
   document.getElementById('hide-listings').addEventListener('click',hidelistings);
+  document.getElementById('searchbox').addEventListener('focus', hidelistings);
 
   function showlistings () {
     var bounds = new google.maps.LatLngBounds();
