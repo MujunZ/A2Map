@@ -4,6 +4,7 @@ var locations = [{
                   lat:42.2409745,
                   lng:-83.7698831
                },
+               yelp_id: 'godaiko-japanese-restaurant-ann-arbor',
                content:'First Dinner!'
             },
             {
@@ -12,6 +13,7 @@ var locations = [{
                   lat:42.248919,
                   lng:-83.654703
                },
+               yelp_id: 'pita-pita-ypsilanti-3',
                content:'Faverate Restaruant'
             },
             {
@@ -20,6 +22,7 @@ var locations = [{
                   lat:42.2571668,
                   lng:-83.7299455
                },
+               yelp_id: 'chia-shiang-restaurant-ann-arbor-2',
                content:'Blacklist'
             }
       	];
