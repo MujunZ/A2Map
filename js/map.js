@@ -49,9 +49,13 @@ function initMap () {
     var position = locations[i].location;
         title = locations[i].title;
         content = locations[i].content;
+        yelpPhone = locations[i].yelpPhone;
+        yelpImg = locations[i].yelpImg;
     var marker = new google.maps.Marker({
       position: position,
       title: title,
+      phone: yelpPhone,
+      img: yelpImg,
       icon: minionIcon,
       //icon: defaultIcon,
       content: content,
@@ -105,18 +109,17 @@ function initMap () {
     map.fitBounds(bounds);
   };
 
-  function hidelistings (argument) {
+  function hidelistings () {
     for(var i = 0, length1 = markers.length; i < length1; i++){
        markers[i].setMap(null);
      } 
   }
-
 };
 
 function populateInfoWindow (marker, infowindow) {
   if (infowindow.marker != marker){
     infowindow.marker = marker;
-    infowindow.setContent('<div>' + marker.title + '<div><p>' + marker.content + '</p>');
+    infowindow.setContent('<div class="markerWindow" id="markerWindow'+ marker.id +'"><h1 class="locationTitle">'+ marker.title +'</h1><p>'+ marker.phone +'</p>');
     infowindow.open(map, marker);
     infowindow.addListener('closeclick', function(){
       infowindow.close(); 

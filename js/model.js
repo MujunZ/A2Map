@@ -133,6 +133,5 @@ var DeStijl = [
 var Location = function (data) {
 	this.title = ko.observable(data.title);
    this.location = ko.observable(data.location);
-   //this.match = ko.observable(-1);
    this.isVisible = ko.observable(true);
-};   	
+};
