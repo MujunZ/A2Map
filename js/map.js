@@ -1,5 +1,6 @@
 var map;
 var markers = [];
+var windowContent;
 
 function addNewMapMarker(that, marker, largeInfowindow, locations, i, minionIcon, highlightedIcon, map) {
     
@@ -51,8 +52,6 @@ function initMap () {
 
   // set marker values
   for(var i = 0; i < locations.length; i++){
-    console.log("What the hell. is i")
-    console.log(i)
     var position = locations[i].location;
         title = locations[i].title;
         content = locations[i].content;
@@ -61,8 +60,6 @@ function initMap () {
     var marker = new google.maps.Marker({
       position: position,
       title: title,
-      phone: yelpPhone,
-      img: yelpImg,
       icon: minionIcon,
       //icon: defaultIcon,
       content: content,
@@ -72,7 +69,7 @@ function initMap () {
     myLocation = locations[i]
     markers.push(marker);
 
-    var addListenerWrapper = function (i) {
+    var addListenerWrapper = function (i) { //Here wrap the following 3 functions up to ensure that each marker has a different "i"
       marker.addListener('click', function () {
         populateInfoWindow(this, largeInfowindow, locations, i);
       });
@@ -83,12 +80,8 @@ function initMap () {
       marker.addListener('mouseout', function () {
         this.setIcon(minionIcon);
       });
-    }
-    addListenerWrapper(i)
-
-
-
-    // addNewMapMarker(this, marker, largeInfowindow, locations, markers.indexOf(marker), minionIcon, highlightedIcon, map);
+    };
+    addListenerWrapper(i);
   };
 
   //show all markers
@@ -132,11 +125,20 @@ function initMap () {
   }
 };
 
+function createMarkerWindow (marker,i) {
+  var yelpPhone = locations[i].yelpPhone;
+  var yelpImg = locations[i].yelpImg;
+  var $markerWindowTemplate = $('script[data-template="markerWindowTemp"]').html();
+  windowContent = $markerWindowTemplate.replace(/{{id}}/g, marker.id).replace(/{{locationTitle}}/g, marker.title).replace(/{{locationPhone}}/g, yelpPhone).replace(/{{locationImg}}/g,yelpImg);
+  windowContent = String(windowContent);
+  return windowContent;
+};
+
 function populateInfoWindow (marker, infowindow, locations, i) {
-  yelpPhone = locations[i].yelpPhone;
+  createMarkerWindow(marker,i);
   if (infowindow.marker != marker){
     infowindow.marker = marker;
-    infowindow.setContent('<div class="markerWindow" id="markerWindow'+ marker.id +'"><h1 class="locationTitle">'+ marker.title +'</h1><p>'+ yelpPhone +'</p>');
+    infowindow.setContent(windowContent);
     infowindow.open(map, marker);
     infowindow.addListener('closeclick', function(){
       infowindow.close(); 

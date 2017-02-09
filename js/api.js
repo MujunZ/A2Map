@@ -39,7 +39,6 @@ var yelpBusinessInfo = function (locationItem) {
       locationItem.yelpName = results.name;
       locationItem.yelpPhone = results.display_phone;
       locationItem.yelpImg = results.image_url;
-      console.log(locationItem.yelpPhone);
     },
     fail: function() {
       console.log(":(");
