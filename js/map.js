@@ -129,8 +129,7 @@ function createMarkerWindow (marker,i) {
   var yelpPhone = locations[i].yelpPhone;
   var yelpImg = locations[i].yelpImg;
   var $markerWindowTemplate = $('script[data-template="markerWindowTemp"]').html();
-  windowContent = $markerWindowTemplate.replace(/{{id}}/g, marker.id).replace(/{{locationTitle}}/g, marker.title).replace(/{{locationPhone}}/g, yelpPhone).replace(/{{locationImg}}/g,yelpImg);
-  windowContent = String(windowContent);
+  windowContent = $markerWindowTemplate.replace(/{{id}}/g, marker.id).replace(/{{locationTitle}}/g, marker.title).replace(/{{locationPhone}}/g, yelpPhone).replace(/{{locationImg}}/g,yelpImg).replace(/{{locationContent}}/g, marker.content);
   return windowContent;
 };
 
