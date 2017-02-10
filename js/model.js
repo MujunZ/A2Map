@@ -134,4 +134,5 @@ var Location = function (data) {
 	this.title = ko.observable(data.title);
    this.location = ko.observable(data.location);
    this.isVisible = ko.observable(true);
+   this.tipText = ko.observable('<span class="tooltiptext">Dubble click to hide the pin.</span>');
 };

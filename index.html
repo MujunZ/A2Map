@@ -9,24 +9,21 @@
    <script type="text/javascript" src = "js/map.js" async></script>
  </head>
  <body>
-   <aside class="searchBar" id="searchBar">
+  <main class="container">
+    <section class="searchBar" id="searchBar">
       <input class="inputbox" id="searchbox" data-bind="textInput: searchText" placeholder="Where do you want to search? e.g. restaurant">
-      <p class="test" data-bind="text: searchText"></p>
-      <p class="test" data-bind="text: locationList()[0].match"></p>
-      <ul class="locationListBox" data-bind="foreach:locationList">
+     <div class="buttons">
+       <input class="button" type="button" id="show-listings" value="Show All">
+       <input class="button" type="button" id="hide-listings" value="Hide All">
+     </div>
+      <ul class="locationListBox row" data-bind="foreach:locationList">
          <li class="locationBox" data-bind="text: title, visible:isVisible"></li>
       </ul>
-   </aside>
-   <div class="container">
-     <div class="options-box">
-       <div>
-         <input type="button" id="show-listings" value="Show Listings">
-         <input type="button" id="hide-listings" value="Hide Listings">
-         <input type="button" id="show1" value="show1">
-       </div>
-     </div>
-     <div id="map"></div>
-   </div>
+   </section>
+   <section>
+     <div class="map" id="map"></div>
+   </section>
+  </main>
    <script type="text/template" data-template="markerWindowTemp">
      <div class="markerWindow" id="markerWindow{{id}}">
        <h1 class="locationTitle">{{locationTitle}}</h1>

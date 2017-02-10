@@ -1,6 +1,7 @@
 var ViewModel = function () {
-      		//Always use self=this in KO ViewModel to avoid further complexity
+   //Always use self=this in KO ViewModel to avoid further complexity
 	var self = this;
+   
 
 	//make location list
 	self.locationList = ko.observableArray([]);
@@ -26,3 +27,5 @@ var ViewModel = function () {
 };
 
 ko.applyBindings(new ViewModel());
+
+$('.locationBox').append('<span class="tooltiptext">Dubble click to hide the pin.</span>');
