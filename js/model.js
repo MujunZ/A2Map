@@ -5,7 +5,7 @@ var locations = [{
                   lng:-83.7698831
                },
                yelp_id: 'godaiko-japanese-restaurant-ann-arbor',
-               content:'First Dinner!'
+               content:'Next to Tsai, which\'s a good Asain store.'
             },
             {
                title:'Pita Pita',
@@ -14,7 +14,7 @@ var locations = [{
                   lng:-83.654703
                },
                yelp_id: 'pita-pita-ypsilanti-3',
-               content:'Faverate Restaruant'
+               content:'Adam\'s faverate restaruant.'
             },
             {
                title:'Chia Shiang',
@@ -24,6 +24,51 @@ var locations = [{
                },
                yelp_id: 'chia-shiang-restaurant-ann-arbor-2',
                content:'Blacklist'
+            },
+            {
+               title:'Paesano Restaurant & Wine Bar',
+               location:{
+                  lat:42.2569355,
+                  lng:-83.6934129
+               },
+               yelp_id: 'paesano-restaurant-and-wine-bar-ann-arbor',
+               content:'Italian food.'
+            },
+            {
+               title:'Lai Lai',
+               location:{
+                  lat:42.230086,
+                  lng:-83.680978
+               },
+               yelp_id: 'lai-lai-ypsilanti',
+               content:'Best beef pot'
+            },
+            {
+               title:'Asian Legend',
+               location:{
+                  lat:42.2776989,
+                  lng:-83.744642
+               },
+               yelp_id: 'asian-legend-ann-arbor',
+               content:'Good Chinese Taiwan Style Restaurant.'
+            },
+            {
+               title:'Evergreen Restaurant',
+               location:{
+                  lat:42.3037501,
+                  lng:-83.7080653
+               },
+               yelp_id: 'evergreen-restaurant-ann-arbor',
+               content:'Good Chinese restaurant near north campus.'
+            },
+            {
+               title:'Ypbor Yan',
+               location:{
+                  lat:42.250725,
+                  lng:-83.6644356
+               },
+               yelp_id: 'ypbor-yan-ann-arbor',
+               content:'Good Chinese Sichuan style restaurant.'
             }
       	];
 
