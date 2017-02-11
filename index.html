@@ -1,17 +1,15 @@
 <html>
  <head>
    <link rel="stylesheet" type="text/css" href="css/style.css">
-
-
  </head>
  <body>
   <main class="container">
     <section class="searchBar" id="searchBar">
       <input class="inputbox" id="searchbox" data-bind="textInput: searchText" placeholder="Where do you want to eat?">
-     <div class="buttons">
+<!--      <div class="buttons">
        <input class="button" type="button" id="show-listings" value="Show All">
        <input class="button" type="button" id="hide-listings" value="Hide All">
-     </div>
+     </div> -->
       <ul class="locationListBox row" data-bind="foreach:locationList">
          <li class="locationBox" data-bind="text: title, visible:isVisible"></li>
       </ul>

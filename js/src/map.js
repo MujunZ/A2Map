@@ -2,11 +2,6 @@ var map;
 var markers = [];
 var windowContent;
 
-function addNewMapMarker(that, marker, largeInfowindow, locations, i, minionIcon, highlightedIcon, map) {
-    
-}
-
-
 function initMap () {
   var stylesDeStijl = new google.maps.StyledMapType(DeStijl,{name:'DeStijl'});
   var stylesNeon = new google.maps.StyledMapType(Neon,{name:'Neon'});
@@ -16,8 +11,6 @@ function initMap () {
   */
   map = new google.maps.Map(document.getElementById('map'),{
     center: {lat: 42.25, lng: -83.698},
-    // styles: DeStijl,
-    // mapTypeControl: false,
      mapTypeControlOptions: {
         mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain','DeStijl','Neon']
       },
@@ -107,8 +100,8 @@ function initMap () {
     })(i));
   };
 
-  document.getElementById('show-listings').addEventListener('click',showlistings);
-  document.getElementById('hide-listings').addEventListener('click',hidelistings);
+  // document.getElementById('show-listings').addEventListener('click',showlistings);
+  // document.getElementById('hide-listings').addEventListener('click',hidelistings);
   document.getElementById('searchbox').addEventListener('focus', hidelistings);
 
   function showlistings () {
