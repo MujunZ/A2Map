@@ -1,6 +1,6 @@
 #More than Chinese Resterants in Ann Arbor
 
-> A Udacity Front-end Developer Course Project
+> A [Udacity Front-end Developer Course](https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001) Project
 
 ![](http://icons.iconarchive.com/icons/designbolts/despicable-me-2/48/Minion-Hello-icon.png) Hello! Welcome to Ann Arbor with Minion!
 
