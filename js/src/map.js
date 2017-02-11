@@ -1,6 +1,7 @@
-var map;
-var markers = [];
-var windowContent;
+var map,
+    markers = [],
+    windowContent,
+    mapLoaded = false;
 
 function initMap () {
   var stylesDeStijl = new google.maps.StyledMapType(DeStijl,{name:'DeStijl'});
@@ -119,6 +120,8 @@ function initMap () {
        markers[i].setMap(null);
      } 
   }
+
+  mapLoaded = true;
 };
 
 function createMarkerWindow (marker,i) {
@@ -140,3 +143,11 @@ function populateInfoWindow (marker, infowindow, locations, i) {
     });
   }
 };
+
+//Fallback message
+setTimeout(function () {
+  if (mapLoaded === false) {
+    console.log('map!!!!!!');
+    alert('Google map didn\'t load. Are you sure you are connected to the Internet and not in China?');
+  };
+},1000);
