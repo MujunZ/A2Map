@@ -40,8 +40,8 @@ var yelpBusinessInfo = function (locationItem) {
       locationItem.yelpPhone = results.display_phone;
       locationItem.yelpImg = results.image_url;
     },
-    fail: function() {
-      console.log(":(");
+    error: function() {
+      locationItem.yelpPhone = 'Can\'t get data from Yelp.';
     }
   };
 
