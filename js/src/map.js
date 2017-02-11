@@ -72,6 +72,9 @@ function initMap () {
     var addListenerWrapper = function (i) { //Here wrap the following 3 functions up to ensure that each marker has a different "i"
       marker.addListener('click', function () {
         populateInfoWindow(this, largeInfowindow, locations, i);
+        this.setAnimation(google.maps.Animation.BOUNCE);
+        self = this;
+        setTimeout(function(){ self.setAnimation(null); }, 750);
       });
 
       marker.addListener('mouseover', function () {
