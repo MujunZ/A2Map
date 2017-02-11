@@ -27,5 +27,3 @@ var ViewModel = function () {
 };
 
 ko.applyBindings(new ViewModel());
-
-$('.locationBox').append('<span class="tooltiptext">Dubble click to hide the pin.</span>');
