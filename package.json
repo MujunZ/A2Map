@@ -1,0 +1,23 @@
+{
+  "name": "a2map",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MujunZ/A2Map.git"
+  },
+  "author": "MJ",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MujunZ/A2Map/issues"
+  },
+  "homepage": "https://github.com/MujunZ/A2Map#readme",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-uglify": "^2.1.0"
+  }
+}
