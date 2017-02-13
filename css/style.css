@@ -30,6 +30,12 @@
 	margin: auto;
 }
 
+.selecter {
+	width: 100%;
+	text-align: center;
+	margin: 1em;
+}
+
 .markerWindow {
 	text-align: center;
 }

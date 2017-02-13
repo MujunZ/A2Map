@@ -8,8 +8,8 @@
 <body>
     <main class="container">
         <section class="searchBar" id="searchBar">
-            <input class="inputbox" id="searchbox" data-bind="textInput: searchText" placeholder="Where do you want to eat?">
-            <p>
+            <input class="inputbox row" id="searchbox" data-bind="textInput: searchText" placeholder="Where do you want to eat?">
+            <p class="selecter row">
                 What type of food do you like?
                 <select id='selectedTag' data-bind="optionsCaption: 'Choose...', options: restaurantTag, selectedOptions: selectedTag"></select>
             </p>
