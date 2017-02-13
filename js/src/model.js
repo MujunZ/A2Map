@@ -5,6 +5,7 @@ var locations = [{
         lng: -83.7698831
     },
     tag: 'Japanese',
+    visibility: true,
     yelp_id: 'godaiko-japanese-restaurant-ann-arbor',
     content: 'Next to Tsai, which\'s a good Asain store.'
 }, {
@@ -14,6 +15,7 @@ var locations = [{
         lng: -83.654703
     },
     tag: 'Mediterranean',
+    visibility: true,
     yelp_id: 'pita-pita-ypsilanti-3',
     content: 'Adam\'s faverate restaruant.'
 }, {
@@ -23,6 +25,7 @@ var locations = [{
         lng: -83.7299455
     },
     tag: 'Chinese',
+    visibility: true,
     yelp_id: 'chia-shiang-restaurant-ann-arbor-2',
     content: 'Blacklist'
 }, {
@@ -32,6 +35,7 @@ var locations = [{
         lng: -83.6934129
     },
     tag: 'Italian',
+    visibility: true,
     yelp_id: 'paesano-restaurant-and-wine-bar-ann-arbor',
     content: 'Italian food.'
 }, {
@@ -41,6 +45,7 @@ var locations = [{
         lng: -83.680978
     },
     tag: 'Chinese',
+    visibility: true,
     yelp_id: 'lai-lai-ypsilanti',
     content: 'Best beef pot'
 }, {
@@ -50,6 +55,7 @@ var locations = [{
         lng: -83.744642
     },
     tag: 'Chinese',
+    visibility: true,
     yelp_id: 'asian-legend-ann-arbor',
     content: 'Good Chinese Taiwan Style Restaurant.'
 }, {
@@ -59,6 +65,7 @@ var locations = [{
         lng: -83.7080653
     },
     tag: 'Chinese',
+    visibility: true,
     yelp_id: 'evergreen-restaurant-ann-arbor',
     content: 'Good Chinese restaurant near north campus.'
 }, {
@@ -68,11 +75,10 @@ var locations = [{
         lng: -83.6644356
     },
     tag: 'Chinese',
+    visibility: true,
     yelp_id: 'ypbor-yan-ann-arbor',
     content: 'Good Chinese Sichuan style restaurant.'
 }];
-
-var chineseRestaurant = ko.observableArray(['Test1','test2']);
 
 var DeStijl = [{
     "elementType": "labels",
@@ -297,5 +303,6 @@ var Location = function(data) {
     this.location = ko.observable(data.location);
     this.tag = ko.observable(data.tag);
     this.isVisible = ko.observable(true);
+    this.marker = ko.observable(data.marker);
     this.tipText = ko.observable('<span class="tooltiptext">Dubble click to hide the pin.</span>');
 };

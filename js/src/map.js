@@ -88,7 +88,7 @@ function initMap() {
     });
     myLocation = locations[i]
     markers.push(marker);
-
+    locations[i].marker = marker;
     addListenerWrapper(i);
   };
 
@@ -114,15 +114,6 @@ function initMap() {
 
   document.getElementById('searchbox').addEventListener('focus', hidelistings);
 
-  // function showVisibleMarkers () {
-  //   showlistings();
-  //   var hiddenItems = $("li.locationBox:hidden");
-  //   var locationBox = $("li.locationBox");
-  //   var index = locationBox.indexOf(hiddenItems);
-  //   console.log(index);
-  // };
-  // showVisibleMarkers();
-
   function showlistings() {
     var bounds = new google.maps.LatLngBounds();
     // Extend the coundaries of the map for each marker and display the marker
@@ -138,8 +129,15 @@ function initMap() {
       markers[i].setMap(null);
     }
   }
-
   mapLoaded = true;
+};
+
+function delMarker (i) {
+  if (locations[i].visibility == true) {
+    markers[i].setMap(map);
+  } else {
+    markers[i].setMap(null);
+  };
 };
 
 function createMarkerWindow(marker, i) {

@@ -31,8 +31,10 @@ var ViewModel = function() {
             var match = self.locationList()[i].tag().indexOf(self.selectedTag()) != -1;
             if (!match) {
                 self.locationList()[i].isVisible(false);
+                locations[i].visibility = false;
             } else {
                 self.locationList()[i].isVisible(true);
+                locations[i].visibility = true;
             };
         };
    }, this);
