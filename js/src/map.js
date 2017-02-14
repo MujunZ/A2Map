@@ -141,6 +141,7 @@ function initMap() {
   }
 
   mapLoaded = true;
+  ko.applyBindings(new ViewModel());
 }
 
 function updateMarker () {

@@ -32,11 +32,11 @@ var ViewModel = function() {
       if (!match) {
         self.locationList()[i].isVisible(false);
         locations[i].visibility = false;
-        // locations[i].marker.setMap(null);
+        locations[i].marker.setMap(null);
       } else {
         self.locationList()[i].isVisible(true);
         locations[i].visibility = true;
-        //locations[i].marker.setVisible(true);
+        locations[i].marker.setMap(map);
       }
     }
   }, this);
@@ -51,12 +51,14 @@ var ViewModel = function() {
       if (!match) {
         self.locationList()[i].isVisible(false);
         locations[i].visibility = false;
+        locations[i].marker.setMap(null);
       } else {
         self.locationList()[i].isVisible(true);
         locations[i].visibility = true;
+        locations[i].marker.setMap(map);
       }
     }
   }, this);
 };
 
-ko.applyBindings(new ViewModel());
+// ko.applyBindings(new ViewModel());
