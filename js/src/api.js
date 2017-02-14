@@ -3,10 +3,10 @@
  * Generates a random number and returns it as a string for OAuthentication
  * @return {string}
  */
-var yelpBusinessInfo = function(locationItem) {
+var yelpBusinessInfo = function (locationItem) {
   function nonce_generate() {
     return (Math.floor(Math.random() * 1e12).toString());
-  };
+  }
   // var yelp_url = "https://api.yelp.com/v2/search?";
   var yelp_url = "https://api.yelp.com/v2/business/";
 

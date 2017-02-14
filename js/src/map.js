@@ -49,7 +49,7 @@ function initMap() {
       scaledSize: new google.maps.Size(21, 34)
     };
     return markerImage;
-  };
+  }
 
   //marker event listeners
   var addListenerWrapper = function(i) { //Here wrap the following 3 functions up to ensure that each marker has a different "i"
@@ -91,7 +91,7 @@ function initMap() {
     markers.push(marker);
     addListenerWrapper(i);
     
-  };
+  }
 
   // update the markers. I don't understand why I need to put change() in a change()
   $('select').change(function () {
@@ -116,7 +116,7 @@ function initMap() {
         markers[iCopy].setMap(null);
       };
     })(i));
-  };
+  }
 
   document.getElementById('searchbox').addEventListener('focus', hidelistings);
 
@@ -128,7 +128,7 @@ function initMap() {
       bounds.extend(markers[i].position);
     }
     map.fitBounds(bounds);
-  };
+  }
 
   function hidelistings() {
     for (var i = 0, length1 = markers.length; i < length1; i++) {
@@ -137,7 +137,7 @@ function initMap() {
   }
 
   mapLoaded = true;
-};
+}
 
 function updateMarker () {
   for(var i = 0, length1 = locations.length; i < length1; i++){
@@ -145,10 +145,10 @@ function updateMarker () {
       locations[i].marker.setMap(map);
     } else {
       locations[i].marker.setMap(null);
-    };
+    }
     console.log('updated!');
-  };
-};
+  }
+}
 
 function createMarkerWindow(marker, i) {
   var yelpPhone = locations[i].yelpPhone;
@@ -156,7 +156,7 @@ function createMarkerWindow(marker, i) {
   var $markerWindowTemplate = $('script[data-template="markerWindowTemp"]').html();
   windowContent = $markerWindowTemplate.replace(/{{id}}/g, marker.id).replace(/{{locationTitle}}/g, marker.title).replace(/{{locationPhone}}/g, yelpPhone).replace(/{{locationImg}}/g, yelpImg).replace(/{{locationContent}}/g, marker.content);
   return windowContent;
-};
+}
 
 function populateInfoWindow(marker, infowindow, locations, i) {
   createMarkerWindow(marker, i);
@@ -168,11 +168,11 @@ function populateInfoWindow(marker, infowindow, locations, i) {
       infowindow.marker = null;
     });
   }
-};
+}
 
 //Fallback message
 setTimeout(function() {
   if (mapLoaded === false) {
     alert('Google map didn\'t load. Are you sure you are connected to the Internet and not in China?');
-  };
+  }
 }, 1000);
