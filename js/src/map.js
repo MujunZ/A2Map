@@ -72,25 +72,31 @@ function initMap() {
 
   // set marker values
   for (var i = 0; i < locations.length; i++) {
-    var position = locations[i].location;
-    title = locations[i].title;
-    content = locations[i].content;
-    yelpPhone = locations[i].yelpPhone;
-    yelpImg = locations[i].yelpImg;
-    var marker = new google.maps.Marker({
+    var position = locations[i].location,
+    title = locations[i].title,
+    content = locations[i].content,
+    yelpPhone = locations[i].yelpPhone,
+    yelpImg = locations[i].yelpImg,
+    visible = locations[i].visibility;
+    locations[i].marker = new google.maps.Marker({
       position: position,
       title: title,
       icon: minionIcon,
-      //icon: defaultIcon,
       content: content,
+      visible: visible,
       animation: google.maps.Animation.DROP,
       id: i
     });
-    myLocation = locations[i]
+    var marker = locations[i].marker;
     markers.push(marker);
-    locations[i].marker = marker;
     addListenerWrapper(i);
+    
   };
+
+  // update the markers. I don't understand why I need to put change() in a change()
+  $('select').change(function () {
+    $('select').change(updateMarker());
+  });
 
   //show all markers
   showlistings();
@@ -129,14 +135,18 @@ function initMap() {
       markers[i].setMap(null);
     }
   }
+
   mapLoaded = true;
 };
 
-function delMarker (i) {
-  if (locations[i].visibility == true) {
-    markers[i].setMap(map);
-  } else {
-    markers[i].setMap(null);
+function updateMarker () {
+  for(var i = 0, length1 = locations.length; i < length1; i++){
+    if (locations[i].visibility === true) {
+      locations[i].marker.setMap(map);
+    } else {
+      locations[i].marker.setMap(null);
+    };
+    console.log('updated!');
   };
 };
 
@@ -155,7 +165,7 @@ function populateInfoWindow(marker, infowindow, locations, i) {
     infowindow.setContent(windowContent);
     infowindow.open(map, marker);
     infowindow.addListener('closeclick', function() {
-      infowindow.close();
+      infowindow.marker = null;
     });
   }
 };

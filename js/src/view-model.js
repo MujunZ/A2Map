@@ -25,16 +25,18 @@ var ViewModel = function() {
 
    self.selectedTag = ko.observable('');
 
-   //match items with the tag
+   //match items with the tag catagories
    self.matchTag = ko.computed(function () {
       for (var i = 0, length1 = self.locationList().length; i < length1; i++) {
             var match = self.locationList()[i].tag().indexOf(self.selectedTag()) != -1;
             if (!match) {
                 self.locationList()[i].isVisible(false);
                 locations[i].visibility = false;
+                // locations[i].marker.setMap(null);
             } else {
                 self.locationList()[i].isVisible(true);
                 locations[i].visibility = true;
+                //locations[i].marker.setVisible(true);
             };
         };
    }, this);
