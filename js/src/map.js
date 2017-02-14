@@ -98,6 +98,10 @@ function initMap() {
     $('select').change(updateMarker());
   });
 
+  $('input').keyup(function () {
+    $('input').keyup(updateMarker());
+  });
+
   //show all markers
   showlistings();
 
@@ -118,7 +122,7 @@ function initMap() {
     })(i));
   }
 
-  document.getElementById('searchbox').addEventListener('focus', hidelistings);
+  //document.getElementById('searchbox').addEventListener('focus', hidelistings);
 
   function showlistings() {
     var bounds = new google.maps.LatLngBounds();
@@ -146,7 +150,6 @@ function updateMarker () {
     } else {
       locations[i].marker.setMap(null);
     }
-    console.log('updated!');
   }
 }
 
