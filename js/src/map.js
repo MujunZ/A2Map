@@ -94,9 +94,7 @@ function initMap() {
     
   }
   //show all markers
-  showlistings();
-
-  function showlistings() {
+  (function showlistings() {
     var bounds = new google.maps.LatLngBounds();
     // Extend the coundaries of the map for each marker and display the marker
     for (var i = 0, length1 = markers.length; i < length1; i++) {
@@ -104,27 +102,21 @@ function initMap() {
       bounds.extend(markers[i].position);
     }
     map.fitBounds(bounds);
-  }
-
-  function hidelistings() {
-    for (var i = 0, length1 = markers.length; i < length1; i++) {
-      markers[i].setMap(null);
-    }
-  }
+  }());
 
   ko.applyBindings(new ViewModel());
 }
 
-function createMarkerWindow(marker, i) {
-  var contact = locations[i].contact;
-  var menu = locations[i].menu;
-  var $markerWindowTemplate = '<div class="markerWindow" id="markerWindow{{id}}"><h1 class="locationTitle">{{locationTitle}}</h1><p><a href="{{menu}}">menu</a></p><p class="locationPhone">Phone: {{locationPhone}}</p><p class="locationContent">MJ\'s Note: {{locationContent}}</p></div>';
-  windowContent = $markerWindowTemplate.replace(/{{id}}/g, marker.id).replace(/{{locationTitle}}/g, marker.title).replace(/{{locationPhone}}/g, contact).replace(/{{menu}}/g, menu).replace(/{{locationContent}}/g, marker.content);
-  return windowContent;
-}
+// function createMarkerWindow() {
+//   var contact = this.contact;
+//   var menu = this.menu;
+//   var $markerWindowTemplate = '<div class="markerWindow" id="markerWindow{{id}}"><h1 class="locationTitle">{{locationTitle}}</h1><p><a href="{{menu}}">menu</a></p><p class="locationPhone">Phone: {{locationPhone}}</p><p class="locationContent">MJ\'s Note: {{locationContent}}</p></div>';
+//   windowContent = $markerWindowTemplate.replace(/{{id}}/g, this.marker.id).replace(/{{locationTitle}}/g, this.marker.title).replace(/{{locationPhone}}/g, contact).replace(/{{menu}}/g, menu).replace(/{{locationContent}}/g, this.marker.content);
+//   return windowContent;
+// }
 
 function populateInfoWindow(marker, infowindow, locations, i) {
-  createMarkerWindow(marker, i);
+  createMarkerWindow();
   if (infowindow.marker != marker) {
     infowindow.marker = marker;
     infowindow.setContent(windowContent);

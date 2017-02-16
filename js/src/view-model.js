@@ -13,6 +13,13 @@ var ViewModel = function() {
     this.isVisible = ko.observable(true);
     this.marker = data.marker;
     this.clickCount = 0;
+    this.createMarkerWindow = function () {
+        var contact = this.contact;
+        var menu = this.menu;
+        var $markerWindowTemplate = '<div class="markerWindow" id="markerWindow{{id}}"><h1 class="locationTitle">{{locationTitle}}</h1><p><a href="{{menu}}">menu</a></p><p class="locationPhone">Phone: {{locationPhone}}</p><p class="locationContent">MJ\'s Note: {{locationContent}}</p></div>';
+        windowContent = $markerWindowTemplate.replace(/{{id}}/g, this.marker.id).replace(/{{locationTitle}}/g, this.marker.title).replace(/{{locationPhone}}/g, contact).replace(/{{menu}}/g, menu).replace(/{{locationContent}}/g, this.marker.content);
+        return windowContent;
+    }
     this.setMarker = function () {
         this.marker.setMap(map);
         self.selectedTag('empty');
