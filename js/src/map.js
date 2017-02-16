@@ -60,8 +60,8 @@ function initMap() {
       this.setAnimation(google.maps.Animation.BOUNCE);
       self = this;
       setTimeout(function() {
-        self.setAnimation(null);
-      }, 750);
+        this.setAnimation(null);
+      }.bind(this), 750);
     });
 
     marker.addListener('mouseover', function() {
