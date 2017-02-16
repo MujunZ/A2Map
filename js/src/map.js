@@ -75,7 +75,7 @@ function initMap() {
     var position = locations[i].location,
     title = locations[i].title,
     content = locations[i].content,
-    yelpPhone = locations[i].contact,
+    contact = locations[i].contact,
     visible = locations[i].visibility;
     locations[i].marker = new google.maps.Marker({
       position: position,
@@ -91,37 +91,8 @@ function initMap() {
     addListenerWrapper(i);
     
   }
-
-  // update the markers. I don't understand why I need to put change() in a change()
-  $('select').change(function () {
-    $('select').change(updateMarker());
-  });
-
-  $('input').keyup(function () {
-    $('input').keyup(updateMarker());
-  });
-
   //show all markers
   showlistings();
-
-  /*
-   * @description click the name in the list to show the mark on the map
-   */
-  var locationBox = document.getElementsByClassName('locationBox');
-  for (var i = 0, length1 = locationBox.length; i < length1; i++) {
-    locationBox[i].addEventListener('click', (function(iCopy) {
-      return function() {
-        markers[iCopy].setMap(map);
-      };
-    })(i));
-    locationBox[i].addEventListener('dblclick', (function(iCopy) {
-      return function() {
-        markers[iCopy].setMap(null);
-      };
-    })(i));
-  }
-
-  //document.getElementById('searchbox').addEventListener('focus', hidelistings);
 
   function showlistings() {
     var bounds = new google.maps.LatLngBounds();

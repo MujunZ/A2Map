@@ -14,7 +14,7 @@
                 <select id='selectedTag' data-bind="optionsCaption: 'Choose...', options: restaurantTag, selectedOptions: selectedTag"></select>
             </p>
             <ul class="locationListBox row" data-bind="foreach:locationList">
-                <li class="locationBox" data-bind="text: title, visible:isVisible"></li>
+                <li class="locationBox" data-bind="text: title, visible:isVisible, click: toggleMarker"></li>
             </ul>
         </section>
         <section>

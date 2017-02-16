@@ -286,15 +286,23 @@ var Neon = [{
     }]
 }];
 
-/*
- *@Description set value to Location
- *@constructor
- */
-var Location = function(data) {
-    this.title = ko.observable(data.title);
-    this.location = ko.observable(data.location);
-    this.tag = ko.observable(data.tag);
-    this.isVisible = ko.observable(true);
-    this.marker = ko.observable(data.marker);
-    this.tipText = ko.observable('<span class="tooltiptext">Dubble click to hide the pin.</span>');
+// Define single click
+ko.bindingHandlers.singleClick= {
+    init: function(element, valueAccessor) {
+        var handler = valueAccessor(),
+            delay = 400,
+            clickTimeout = false;
+
+        $(element).click(function() {
+            if(clickTimeout !== false) {
+                clearTimeout(clickTimeout);
+                clickTimeout = false;
+            } else {        
+                clickTimeout = setTimeout(function() {
+                    clickTimeout = false;
+                    handler();
+                }, delay);
+            }
+        });
+    }
 };
