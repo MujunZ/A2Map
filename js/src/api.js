@@ -1,57 +1,22 @@
-//yelp
-/**
- * Generates a random number and returns it as a string for OAuthentication
- * @return {string}
- */
-var yelpBusinessInfo = function (locationItem) {
-  function nonce_generate() {
-    return (Math.floor(Math.random() * 1e12).toString());
-  }
-  // var yelp_url = "https://api.yelp.com/v2/search?";
-  var yelp_url = "https://api.yelp.com/v2/business/";
+function fourSquareInfo(locationItem) {
+    var clientID = 'EQZYLLLIO3W12LHM1IF0FETRZM5DF0QSNKCMFSUHP0S1QA3P',
+        clientSecret = 'ZBJ0X0JGO5DQBJEUXGBLZ4ARTZD11QLQKZJTVGOANSW10MGK',
+        name = locationItem.title,
+        lat = locationItem.location.lat,
+        lng = locationItem.location.lng;
+    var fourSquareUrl = 'https://api.foursquare.com/v2/venues/search?ll=' + lat + ',' + lng + '&client_id=' + clientID + '&client_secret=' + clientSecret + '&v=20170215&query=' + name + '&limit=1';
+    $.ajax({
+        url: fourSquareUrl,
+        dataType: "jsonp",
+    }).done(function(results) {
+        var data = results.response.venues[0]
+        data.contact.formattedPhone != null ? locationItem.contact = data.contact.formattedPhone : locationItem.contact = 'No data from Foursqueare';
+        data.menu != null ? locationItem.menu = data.menu.mobileUrl : locationItem.menu = 'https://foursquare.com/';
+    }).fail(function() {
+        locationItem.formattedPhone = 'Can\'t get data from Foursqueare.';
+    });
+}
 
-  var YELP_KEY = "CyaDrXaf6BP3dbxVVkzOaQ";
-  YELP_TOKEN = "x8Gpg1Nwc76RQa5_41AqVwsVvVhpnATA";
-  YELP_KEY_SECRET = "kfvgXm5uTPfd25WGalVKsrqu9HE";
-  YELP_TOKEN_SECRET = "t4_VZDvjXtJdVT36OSfpY3DaOt4";
-  var parameters = {
-    term: 'cream puff',
-    location: 'Ann Arbor',
-    id: locationItem.yelp_id,
-    oauth_consumer_key: YELP_KEY,
-    oauth_token: YELP_TOKEN,
-    oauth_nonce: nonce_generate(),
-    oauth_timestamp: Math.floor(Date.now() / 1000),
-    oauth_signature_method: 'HMAC-SHA1',
-    oauth_version: '1.0',
-    callback: 'cb' // This is crucial to include for jsonp implementation in AJAX or else the oauth-signature will be wrong.
-  };
-
-  var encodedSignature = oauthSignature.generate('GET', yelp_url + parameters.id, parameters, YELP_KEY_SECRET, YELP_TOKEN_SECRET);
-  parameters.oauth_signature = encodedSignature;
-
-  var settings = {
-    url: yelp_url + parameters.id,
-    data: parameters,
-    cache: true, // This is crucial to include as well to prevent jQuery from adding on a cache-buster parameter "_=23489489749837", invalidating our oauth-signature
-    dataType: 'jsonp',
-    success: function(results) {
-      locationItem.yelpName = results.name;
-      locationItem.yelpPhone = results.display_phone;
-      locationItem.yelpImg = results.image_url;
-    },
-    error: function() {
-      locationItem.yelpPhone = 'Can\'t get data from Yelp.';
-    }
-  };
-
-  // Send AJAX query via jQuery library.
-  $.ajax(settings);
-};
-
-/*
- * @description set yelp value to locations
- */
 locations.forEach(function(locationItem) {
-  yelpBusinessInfo(locationItem);
+    fourSquareInfo(locationItem);
 });

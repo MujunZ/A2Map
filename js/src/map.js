@@ -75,8 +75,7 @@ function initMap() {
     var position = locations[i].location,
     title = locations[i].title,
     content = locations[i].content,
-    yelpPhone = locations[i].yelpPhone,
-    yelpImg = locations[i].yelpImg,
+    contact = locations[i].contact,
     visible = locations[i].visibility;
     locations[i].marker = new google.maps.Marker({
       position: position,
@@ -92,37 +91,8 @@ function initMap() {
     addListenerWrapper(i);
     
   }
-
-  // update the markers. I don't understand why I need to put change() in a change()
-  $('select').change(function () {
-    $('select').change(updateMarker());
-  });
-
-  $('input').keyup(function () {
-    $('input').keyup(updateMarker());
-  });
-
   //show all markers
   showlistings();
-
-  /*
-   * @description click the name in the list to show the mark on the map
-   */
-  var locationBox = document.getElementsByClassName('locationBox');
-  for (var i = 0, length1 = locationBox.length; i < length1; i++) {
-    locationBox[i].addEventListener('click', (function(iCopy) {
-      return function() {
-        markers[iCopy].setMap(map);
-      };
-    })(i));
-    locationBox[i].addEventListener('dblclick', (function(iCopy) {
-      return function() {
-        markers[iCopy].setMap(null);
-      };
-    })(i));
-  }
-
-  //document.getElementById('searchbox').addEventListener('focus', hidelistings);
 
   function showlistings() {
     var bounds = new google.maps.LatLngBounds();
@@ -141,23 +111,14 @@ function initMap() {
   }
 
   mapLoaded = true;
-}
-
-function updateMarker () {
-  for(var i = 0, length1 = locations.length; i < length1; i++){
-    if (locations[i].visibility === true) {
-      locations[i].marker.setMap(map);
-    } else {
-      locations[i].marker.setMap(null);
-    }
-  }
+  ko.applyBindings(new ViewModel());
 }
 
 function createMarkerWindow(marker, i) {
-  var yelpPhone = locations[i].yelpPhone;
-  var yelpImg = locations[i].yelpImg;
+  var contact = locations[i].contact;
+  var menu = locations[i].menu;
   var $markerWindowTemplate = $('script[data-template="markerWindowTemp"]').html();
-  windowContent = $markerWindowTemplate.replace(/{{id}}/g, marker.id).replace(/{{locationTitle}}/g, marker.title).replace(/{{locationPhone}}/g, yelpPhone).replace(/{{locationImg}}/g, yelpImg).replace(/{{locationContent}}/g, marker.content);
+  windowContent = $markerWindowTemplate.replace(/{{id}}/g, marker.id).replace(/{{locationTitle}}/g, marker.title).replace(/{{locationPhone}}/g, contact).replace(/{{menu}}/g, menu).replace(/{{locationContent}}/g, marker.content);
   return windowContent;
 }
 

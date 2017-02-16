@@ -6,7 +6,6 @@ var locations = [{
     },
     tag: 'Japanese',
     visibility: true,
-    yelp_id: 'godaiko-japanese-restaurant-ann-arbor',
     content: 'Next to Tsai, which\'s a good Asain store.'
 }, {
     title: 'Pita Pita',
@@ -16,7 +15,6 @@ var locations = [{
     },
     tag: 'Mediterranean',
     visibility: true,
-    yelp_id: 'pita-pita-ypsilanti-3',
     content: 'Adam\'s faverate restaruant.'
 }, {
     title: 'Chia Shiang',
@@ -26,7 +24,6 @@ var locations = [{
     },
     tag: 'Chinese',
     visibility: true,
-    yelp_id: 'chia-shiang-restaurant-ann-arbor-2',
     content: 'Blacklist'
 }, {
     title: 'Paesano Restaurant & Wine Bar',
@@ -36,7 +33,6 @@ var locations = [{
     },
     tag: 'Italian',
     visibility: true,
-    yelp_id: 'paesano-restaurant-and-wine-bar-ann-arbor',
     content: 'Italian food.'
 }, {
     title: 'Lai Lai',
@@ -46,7 +42,6 @@ var locations = [{
     },
     tag: 'Chinese',
     visibility: true,
-    yelp_id: 'lai-lai-ypsilanti',
     content: 'Best beef pot'
 }, {
     title: 'Asian Legend',
@@ -56,7 +51,6 @@ var locations = [{
     },
     tag: 'Chinese',
     visibility: true,
-    yelp_id: 'asian-legend-ann-arbor',
     content: 'Good Chinese Taiwan Style Restaurant.'
 }, {
     title: 'Evergreen Restaurant',
@@ -66,7 +60,6 @@ var locations = [{
     },
     tag: 'Chinese',
     visibility: true,
-    yelp_id: 'evergreen-restaurant-ann-arbor',
     content: 'Good Chinese restaurant near north campus.'
 }, {
     title: 'Ypbor Yan',
@@ -76,7 +69,6 @@ var locations = [{
     },
     tag: 'Chinese',
     visibility: true,
-    yelp_id: 'ypbor-yan-ann-arbor',
     content: 'Good Chinese Sichuan style restaurant.'
 }];
 
@@ -294,15 +286,23 @@ var Neon = [{
     }]
 }];
 
-/*
- *@Description set value to Location
- *@constructor
- */
-var Location = function(data) {
-    this.title = ko.observable(data.title);
-    this.location = ko.observable(data.location);
-    this.tag = ko.observable(data.tag);
-    this.isVisible = ko.observable(true);
-    this.marker = ko.observable(data.marker);
-    this.tipText = ko.observable('<span class="tooltiptext">Dubble click to hide the pin.</span>');
+// Define single click
+ko.bindingHandlers.singleClick= {
+    init: function(element, valueAccessor) {
+        var handler = valueAccessor(),
+            delay = 400,
+            clickTimeout = false;
+
+        $(element).click(function() {
+            if(clickTimeout !== false) {
+                clearTimeout(clickTimeout);
+                clickTimeout = false;
+            } else {        
+                clickTimeout = setTimeout(function() {
+                    clickTimeout = false;
+                    handler();
+                }, delay);
+            }
+        });
+    }
 };
