@@ -75,8 +75,7 @@ function initMap() {
     var position = locations[i].location,
     title = locations[i].title,
     content = locations[i].content,
-    yelpPhone = locations[i].yelpPhone,
-    yelpImg = locations[i].yelpImg,
+    yelpPhone = locations[i].contact,
     visible = locations[i].visibility;
     locations[i].marker = new google.maps.Marker({
       position: position,
@@ -155,10 +154,10 @@ function updateMarker () {
 }
 
 function createMarkerWindow(marker, i) {
-  var yelpPhone = locations[i].yelpPhone;
-  var yelpImg = locations[i].yelpImg;
+  var contact = locations[i].contact;
+  var menu = locations[i].menu;
   var $markerWindowTemplate = $('script[data-template="markerWindowTemp"]').html();
-  windowContent = $markerWindowTemplate.replace(/{{id}}/g, marker.id).replace(/{{locationTitle}}/g, marker.title).replace(/{{locationPhone}}/g, yelpPhone).replace(/{{locationImg}}/g, yelpImg).replace(/{{locationContent}}/g, marker.content);
+  windowContent = $markerWindowTemplate.replace(/{{id}}/g, marker.id).replace(/{{locationTitle}}/g, marker.title).replace(/{{locationPhone}}/g, contact).replace(/{{menu}}/g, menu).replace(/{{locationContent}}/g, marker.content);
   return windowContent;
 }
 
