@@ -16,7 +16,6 @@ var ViewModel = function() {
     this.setMarker = function () {
         this.marker.setMap(map);
         self.selectedTag('empty');
-        console.log(self.selectedTag())
     }; 
     this.removeMarker = function () {
         this.marker.setMap(null);
@@ -29,7 +28,7 @@ var ViewModel = function() {
       } else {
         this.removeMarker();
       }
-    }
+    };
     this.tipText = ko.observable('<span class="tooltiptext">Dubble click to hide the pin.</span>');
 };
 

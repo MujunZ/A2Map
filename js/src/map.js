@@ -114,16 +114,6 @@ function initMap() {
   ko.applyBindings(new ViewModel());
 }
 
-function updateMarker () {
-  for(var i = 0, length1 = locations.length; i < length1; i++){
-    if (locations[i].visibility === true) {
-      locations[i].marker.setMap(map);
-    } else {
-      locations[i].marker.setMap(null);
-    }
-  }
-}
-
 function createMarkerWindow(marker, i) {
   var contact = locations[i].contact;
   var menu = locations[i].menu;
