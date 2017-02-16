@@ -13,7 +13,8 @@ function fourSquareInfo(locationItem) {
         data.contact.formattedPhone != null ? locationItem.contact = data.contact.formattedPhone : locationItem.contact = 'No data from Foursqueare';
         data.menu != null ? locationItem.menu = data.menu.mobileUrl : locationItem.menu = 'https://foursquare.com/';
     }).fail(function() {
-        locationItem.formattedPhone = 'Can\'t get data from Foursqueare.';
+        console.log('Can\'t get data from Foursqueare.');
+        locationItem.contact = 'Can\'t get data from Foursqueare.';
     });
 }
 
