@@ -25,6 +25,8 @@ function initMap() {
     zoom: 12
   });
 
+  mapLoaded = true;
+
   //Associate the styled map with the MapTypeId and set it to display.
   map.mapTypes.set('DeStijl', stylesDeStijl);
   map.mapTypes.set('Neon', stylesNeon);
@@ -110,7 +112,6 @@ function initMap() {
     }
   }
 
-  mapLoaded = true;
   ko.applyBindings(new ViewModel());
 }
 
@@ -134,9 +135,9 @@ function populateInfoWindow(marker, infowindow, locations, i) {
   }
 }
 
-//Fallback message
-setTimeout(function() {
+// fail message
+function mapError () {
   if (mapLoaded === false) {
     alert('Google map didn\'t load. Are you sure you are connected to the Internet and not in China?');
   }
-}, 1000);
+}
