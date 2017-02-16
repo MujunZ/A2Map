@@ -21,22 +21,12 @@
             <div class="map" id="map"></div>
         </section>
     </main>
-    <script type="text/template" data-template="markerWindowTemp">
-        <div class="markerWindow" id="markerWindow{{id}}">
-            <h1 class="locationTitle">{{locationTitle}}</h1>
-            <p><a href="{{menu}}">menu</a></p>
-            <p class="locationPhone">Phone: {{locationPhone}}</p>
-            <p class="locationContent">MJ's Note: {{locationContent}}</p>
-        </div>
-    </script>
     <script src="js/lib/knockout-3.4.1.js"></script>
-    <script src="js/src/view-model.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="js/src/map.js"></script>
     <script src="js/src/model.js"></script>
-    <script src="js/lib/jsOAuth-1.3.7.min.js"></script>
-    <script src="js/lib/oauth-signature.min.js"></script>
-    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQZRjPso65OGyLKBBz-fS0Eb0oQwVpo2g&libraries=geometry&callback=initMap" onerror="mapError()"</script>
+    <script src="js/src/view-model.js"></script>
+    <script src="js/src/map.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQZRjPso65OGyLKBBz-fS0Eb0oQwVpo2g&libraries=geometry&callback=initMap" onerror="mapError()"</script>
     <script src="js/src/api.js"></script>
 </body>
 

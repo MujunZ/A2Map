@@ -118,7 +118,7 @@ function initMap() {
 function createMarkerWindow(marker, i) {
   var contact = locations[i].contact;
   var menu = locations[i].menu;
-  var $markerWindowTemplate = $('script[data-template="markerWindowTemp"]').html();
+  var $markerWindowTemplate = '<div class="markerWindow" id="markerWindow{{id}}"><h1 class="locationTitle">{{locationTitle}}</h1><p><a href="{{menu}}">menu</a></p><p class="locationPhone">Phone: {{locationPhone}}</p><p class="locationContent">MJ\'s Note: {{locationContent}}</p></div>';
   windowContent = $markerWindowTemplate.replace(/{{id}}/g, marker.id).replace(/{{locationTitle}}/g, marker.title).replace(/{{locationPhone}}/g, contact).replace(/{{menu}}/g, menu).replace(/{{locationContent}}/g, marker.content);
   return windowContent;
 }

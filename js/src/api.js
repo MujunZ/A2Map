@@ -12,6 +12,7 @@ function fourSquareInfo(locationItem) {
         var data = results.response.venues[0]
         data.contact.formattedPhone != null ? locationItem.contact = data.contact.formattedPhone : locationItem.contact = 'No data from Foursqueare';
         data.menu != null ? locationItem.menu = data.menu.mobileUrl : locationItem.menu = 'https://foursquare.com/';
+        console.log('goooood');
     }).fail(function() {
         console.log('Can\'t get data from Foursqueare.');
         locationItem.contact = 'Can\'t get data from Foursqueare.';
