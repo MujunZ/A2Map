@@ -1,12 +1,21 @@
 var ViewModel = function() {
   //Always use self=this in KO ViewModel to avoid further complexity
   var self = this;
+  var largeInfowindow = new google.maps.InfoWindow();
+
+  /*
+   * @description make markers
+   */
+  var defaultIcon = makeMarkerIcon('FF0080');
+  var highlightedIcon = makeMarkerIcon('FFED00');
+  var minionIcon = "http://icons.iconarchive.com/icons/designbolts/despicable-me-2/48/Minion-Hello-icon.png";
 
   /*
    * @Description set value to Location
    * @constructor
    */
   var Location = function(data) {
+    var that = this;
     this.title = ko.observable(data.title);
     this.location = ko.observable(data.location);
     this.tag = ko.observable(data.tag);
@@ -17,9 +26,33 @@ var ViewModel = function() {
         var contact = this.contact;
         var menu = this.menu;
         var $markerWindowTemplate = '<div class="markerWindow" id="markerWindow{{id}}"><h1 class="locationTitle">{{locationTitle}}</h1><p><a href="{{menu}}">menu</a></p><p class="locationPhone">Phone: {{locationPhone}}</p><p class="locationContent">MJ\'s Note: {{locationContent}}</p></div>';
-        windowContent = $markerWindowTemplate.replace(/{{id}}/g, this.marker.id).replace(/{{locationTitle}}/g, this.marker.title).replace(/{{locationPhone}}/g, contact).replace(/{{menu}}/g, menu).replace(/{{locationContent}}/g, this.marker.content);
-        return windowContent;
+        this.windowContent = $markerWindowTemplate.replace(/{{id}}/g, this.marker.id).replace(/{{locationTitle}}/g, this.marker.title).replace(/{{locationPhone}}/g, contact).replace(/{{menu}}/g, menu).replace(/{{locationContent}}/g, this.marker.content);
+        return this.windowContent;
+    };
+    this.populateInfoWindow = function (infowindow) {
+      this.createMarkerWindow();
+      if (infowindow.marker != this.marker) {
+        infowindow.marker = this.marker;
+        infowindow.setContent(this.windowContent);
+        infowindow.open(map, this.marker);
+        infowindow.addListener('closeclick', function() {
+          infowindow.marker = null;
+        });
+      }
     }
+    this.marker.addListener('click', function() {
+      that.populateInfoWindow(largeInfowindow);
+      this.setAnimation(google.maps.Animation.BOUNCE);
+      setTimeout(function() {
+        this.setAnimation(null);
+      }.bind(this), 750);
+    });
+    this.marker.addListener('mouseover', function() {
+      this.setIcon(highlightedIcon);
+    });
+    this.marker.addListener('mouseout', function() {
+      this.setIcon(minionIcon);
+    });
     this.setMarker = function () {
         this.marker.setMap(map);
         self.selectedTag('empty');
@@ -38,6 +71,18 @@ var ViewModel = function() {
     };
     this.tipText = ko.observable('<span class="tooltiptext">Dubble click to hide the pin.</span>');
 };
+
+  // draw markers ref: https://developers.google.com/maps/documentation/javascript/markers
+  function makeMarkerIcon(markerColor) {
+    var markerImage = {
+      url: 'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|' + markerColor + '|40|_|%E2%80%A2',
+      size: new google.maps.Size(21, 34),
+      origin: new google.maps.Point(0, 0),
+      anchor: new google.maps.Point(10, 34),
+      scaledSize: new google.maps.Size(21, 34)
+    };
+    return markerImage;
+  }
 
   //make location list
   self.locationList = ko.observableArray([]);

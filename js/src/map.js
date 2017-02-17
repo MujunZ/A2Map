@@ -32,45 +32,8 @@ function initMap() {
   map.mapTypes.set('Neon', stylesNeon);
   map.setMapTypeId('DeStijl');
 
-  var largeInfowindow = new google.maps.InfoWindow();
-
-  /*
-   * @description make markers
-   */
-  var defaultIcon = makeMarkerIcon('FF0080');
-  var highlightedIcon = makeMarkerIcon('FFED00');
   var minionIcon = "http://icons.iconarchive.com/icons/designbolts/despicable-me-2/48/Minion-Hello-icon.png";
 
-  // draw markers ref: https://developers.google.com/maps/documentation/javascript/markers
-  function makeMarkerIcon(markerColor) {
-    var markerImage = {
-      url: 'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|' + markerColor + '|40|_|%E2%80%A2',
-      size: new google.maps.Size(21, 34),
-      origin: new google.maps.Point(0, 0),
-      anchor: new google.maps.Point(10, 34),
-      scaledSize: new google.maps.Size(21, 34)
-    };
-    return markerImage;
-  }
-
-  //marker event listeners
-  var addListenerWrapper = function(i) { //Here wrap the following 3 functions up to ensure that each marker has a different "i"
-    marker.addListener('click', function() {
-      populateInfoWindow(this, largeInfowindow, locations, i);
-      this.setAnimation(google.maps.Animation.BOUNCE);
-      self = this;
-      setTimeout(function() {
-        this.setAnimation(null);
-      }.bind(this), 750);
-    });
-
-    marker.addListener('mouseover', function() {
-      this.setIcon(highlightedIcon);
-    });
-    marker.addListener('mouseout', function() {
-      this.setIcon(minionIcon);
-    });
-  };
 
   // set marker values
   for (var i = 0; i < locations.length; i++) {
@@ -89,10 +52,9 @@ function initMap() {
       id: i
     });
     var marker = locations[i].marker;
-    markers.push(marker);
-    addListenerWrapper(i);
-    
+    markers.push(marker); 
   }
+
   //show all markers
   (function showlistings() {
     var bounds = new google.maps.LatLngBounds();
@@ -105,26 +67,6 @@ function initMap() {
   }());
 
   ko.applyBindings(new ViewModel());
-}
-
-// function createMarkerWindow() {
-//   var contact = this.contact;
-//   var menu = this.menu;
-//   var $markerWindowTemplate = '<div class="markerWindow" id="markerWindow{{id}}"><h1 class="locationTitle">{{locationTitle}}</h1><p><a href="{{menu}}">menu</a></p><p class="locationPhone">Phone: {{locationPhone}}</p><p class="locationContent">MJ\'s Note: {{locationContent}}</p></div>';
-//   windowContent = $markerWindowTemplate.replace(/{{id}}/g, this.marker.id).replace(/{{locationTitle}}/g, this.marker.title).replace(/{{locationPhone}}/g, contact).replace(/{{menu}}/g, menu).replace(/{{locationContent}}/g, this.marker.content);
-//   return windowContent;
-// }
-
-function populateInfoWindow(marker, infowindow, locations, i) {
-  createMarkerWindow();
-  if (infowindow.marker != marker) {
-    infowindow.marker = marker;
-    infowindow.setContent(windowContent);
-    infowindow.open(map, marker);
-    infowindow.addListener('closeclick', function() {
-      infowindow.marker = null;
-    });
-  }
 }
 
 // fail message
