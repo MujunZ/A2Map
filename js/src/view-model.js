@@ -29,8 +29,9 @@ var ViewModel = function() {
         this.windowContent = $markerWindowTemplate.replace(/{{id}}/g, this.marker.id).replace(/{{locationTitle}}/g, this.marker.title).replace(/{{locationPhone}}/g, contact).replace(/{{menu}}/g, menu).replace(/{{locationContent}}/g, this.marker.content);
         return this.windowContent;
     };
-    this.populateInfoWindow = function (infowindow) {
+    this.populateInfoWindow = function (infowindow,locationItem) {
       this.createMarkerWindow();
+      this.getApi(locationItem);
       if (infowindow.marker != this.marker) {
           infowindow.marker = this.marker;
           infowindow.setContent(this.windowContent);
@@ -41,7 +42,7 @@ var ViewModel = function() {
       }
     }
     this.marker.addListener('click', function() {
-      that.populateInfoWindow(largeInfowindow);
+      that.populateInfoWindow(largeInfowindow,that);
       this.setAnimation(google.maps.Animation.BOUNCE);
       setTimeout(function() {
         this.setAnimation(null);
@@ -67,9 +68,12 @@ var ViewModel = function() {
       setTimeout(function() {
         this.marker.setAnimation(null);
       }.bind(this), 750);
-      that.populateInfoWindow(largeInfowindow);
+      that.populateInfoWindow(largeInfowindow,that);
     };
     this.tipText = ko.observable('<span class="tooltiptext">Dubble click to hide the pin.</span>');
+    this.getApi = function (locationItem) {
+      fourSquareInfo(locationItem);
+    }
 };
 
   // draw markers ref: https://developers.google.com/maps/documentation/javascript/markers
