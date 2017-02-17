@@ -32,10 +32,10 @@ var ViewModel = function() {
     this.populateInfoWindow = function (infowindow) {
       this.createMarkerWindow();
       if (infowindow.marker != this.marker) {
-        infowindow.marker = this.marker;
-        infowindow.setContent(this.windowContent);
-        infowindow.open(map, this.marker);
-        infowindow.addListener('closeclick', function() {
+          infowindow.marker = this.marker;
+          infowindow.setContent(this.windowContent);
+          infowindow.open(map, this.marker);
+          infowindow.addListener('closeclick', function() {
           infowindow.marker = null;
         });
       }
@@ -61,13 +61,13 @@ var ViewModel = function() {
         this.marker.setMap(null);
         self.selectedTag('empty');
     };
-    this.toggleMarker = function () {
-      this.clickCount ++;
-      if (this.clickCount % 2 != 1) {
+    this.showMarker = function () {
         this.setMarker();
-      } else {
-        this.removeMarker();
-      }
+        this.marker.setAnimation(google.maps.Animation.BOUNCE);
+      setTimeout(function() {
+        this.marker.setAnimation(null);
+      }.bind(this), 750);
+      that.populateInfoWindow(largeInfowindow);
     };
     this.tipText = ko.observable('<span class="tooltiptext">Dubble click to hide the pin.</span>');
 };

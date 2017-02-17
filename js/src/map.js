@@ -35,12 +35,13 @@ function initMap() {
   var minionIcon = "http://icons.iconarchive.com/icons/designbolts/despicable-me-2/48/Minion-Hello-icon.png";
 
 
-  // set marker values
+  //set marker values
   for (var i = 0; i < locations.length; i++) {
     var position = locations[i].location,
     title = locations[i].title,
     content = locations[i].content,
     contact = locations[i].contact,
+    idx = locations.indexOf(locations[i]),
     visible = locations[i].visibility;
     locations[i].marker = new google.maps.Marker({
       position: position,
@@ -49,7 +50,7 @@ function initMap() {
       content: content,
       visible: visible,
       animation: google.maps.Animation.DROP,
-      id: i
+      id: idx
     });
     var marker = locations[i].marker;
     markers.push(marker); 
