@@ -17,6 +17,7 @@ var ViewModel = function() {
   var Location = function(data) {
     var that = this;
     this.title = ko.observable(data.title);
+    this.position = data.location;
     this.location = ko.observable(data.location);
     this.tag = ko.observable(data.tag);
     this.isVisible = ko.observable(true);
@@ -29,9 +30,9 @@ var ViewModel = function() {
         this.windowContent = $markerWindowTemplate.replace(/{{id}}/g, this.marker.id).replace(/{{locationTitle}}/g, this.marker.title).replace(/{{locationPhone}}/g, contact).replace(/{{menu}}/g, menu).replace(/{{locationContent}}/g, this.marker.content);
         return this.windowContent;
     };
-    this.populateInfoWindow = function (infowindow,locationItem) {
+    this.populateInfoWindow = function (infowindow,data) {
+      this.getApi(data,infowindow);
       this.createMarkerWindow();
-      this.getApi(locationItem);
       if (infowindow.marker != this.marker) {
           infowindow.marker = this.marker;
           infowindow.setContent(this.windowContent);
@@ -71,8 +72,8 @@ var ViewModel = function() {
       that.populateInfoWindow(largeInfowindow,that);
     };
     this.tipText = ko.observable('<span class="tooltiptext">Dubble click to hide the pin.</span>');
-    this.getApi = function (locationItem) {
-      fourSquareInfo(locationItem);
+    this.getApi = function (data) {
+      fourSquareInfo(data);
     }
 };
 
