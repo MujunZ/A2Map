@@ -68,11 +68,6 @@ function initMap() {
   }());
 
   ko.applyBindings(new ViewModel());
-
-  // locations.forEach(function(locationItem) {
-  //   fourSquareInfo(locationItem);
-  //   locationItem.populateInfoWindow(largeInfowindow);
-  // });
 }
 
 // fail message
