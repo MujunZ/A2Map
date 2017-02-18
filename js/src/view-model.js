@@ -32,16 +32,8 @@ var ViewModel = function() {
     };
     this.populateInfoWindow = function (infowindow,data) {
       this.getApi(data,infowindow);
-      this.createMarkerWindow();
-      if (infowindow.marker != this.marker) {
-          infowindow.marker = this.marker;
-          infowindow.setContent(this.windowContent);
-          infowindow.open(map, this.marker);
-          infowindow.addListener('closeclick', function() {
-          infowindow.marker = null;
-        });
+
       }
-    }
     this.marker.addListener('click', function() {
       that.populateInfoWindow(largeInfowindow,that);
       this.setAnimation(google.maps.Animation.BOUNCE);
@@ -72,8 +64,8 @@ var ViewModel = function() {
       that.populateInfoWindow(largeInfowindow,that);
     };
     this.tipText = ko.observable('<span class="tooltiptext">Dubble click to hide the pin.</span>');
-    this.getApi = function (data) {
-      fourSquareInfo(data);
+    this.getApi = function (data,infowindow) {
+      fourSquareInfo(data,infowindow);
     }
 };
 

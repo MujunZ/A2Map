@@ -9,19 +9,19 @@ function fourSquareInfo(locationItem,infowindow) {
         url: fourSquareUrl,
         dataType: "jsonp",
     }).done(function(results) {
-        var data = results.response.venues[0]
-        data.contact.formattedPhone != null ? locationItem.contact = data.contact.formattedPhone : locationItem.contact = 'No data from Foursqueare';
-        data.menu != null ? locationItem.menu = data.menu.mobileUrl : locationItem.menu = 'https://foursquare.com/';
+        var data = results.response.venues[0];
+        data.contact.formattedPhone !== null ? locationItem.contact = data.contact.formattedPhone : locationItem.contact = 'No data from Foursqueare';
+        data.menu !== null ? locationItem.menu = data.menu.mobileUrl : locationItem.menu = 'https://foursquare.com/';
         locationItem.createMarkerWindow();
-        console.log(locationItem.windowContent);
-        console.log(locationItem.marker.title);
-        console.log(results.response.venues[0]);
+        if (infowindow.marker != locationItem.marker) {
+          infowindow.marker = locationItem.marker;
+          infowindow.setContent(locationItem.windowContent);
+          infowindow.open(map, locationItem.marker);
+          infowindow.addListener('closeclick', function() {
+          infowindow.marker = null;
+        })};
     }).fail(function() {
         console.log('Can\'t get data from Foursqueare.');
         locationItem.contact = 'Can\'t get data from Foursqueare.';
     });
 }
-
-// locations.forEach(function(locationItem) {
-//     fourSquareInfo(locationItem);
-// });
