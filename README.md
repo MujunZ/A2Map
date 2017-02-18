@@ -20,7 +20,7 @@ Clone the repo
 
 ## Go to the folder
 
-	$ cd /frontend-nanodegree-feedreader
+	$ cd /A2Map
 
 ## Set up localhost (more details see [here](http://www.linuxjournal.com/content/tech-tip-really-simple-http-server-python))
 
