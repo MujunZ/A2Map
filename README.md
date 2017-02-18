@@ -18,7 +18,7 @@ Clone the repo
 
 	$ git clone https://github.com/MujunZ/A2Map.git
 
-## Go to the filder
+## Go to the folder
 
 	$ cd /frontend-nanodegree-feedreader
 
@@ -54,6 +54,6 @@ Then type the following address in your browser:
 
 ## Acknoledge
 
-Thanks to Udacity hard-working mentors, Karol, Sarah_m, etc., reviewers and Zhilian Dai for your in time help whenever I stuck myself in a corner.
+Thanks to Udacity hard-working mentors, Karol, Sarah_m, etc., reviewers, [Ann Arbor Coffee House Coders](https://www.meetup.com/Ann-Arbor-Coffee-House-Coders) organizer, [Scott Goci](https://github.com/scouttyg) and Chinese Udacity WeChat group Zhilian Dai for your in time help whenever I stuck myself in a corner.
 
-I finally finished（hopefully) this project at the last night of the third months.
+I finally finished（hopefully) this project at the last night of the third month.
