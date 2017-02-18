@@ -1,4 +1,4 @@
-#More than Chinese Resterants in Ann Arbor
+#More than Chinese Restaurant in Ann Arbor
 
 > A [Udacity Front-end Developer Course](https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001) Project
 
