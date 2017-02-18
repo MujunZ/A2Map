@@ -21,7 +21,14 @@ function fourSquareInfo(locationItem,infowindow) {
           infowindow.marker = null;
         })};
     }).fail(function() {
-        console.log('Can\'t get data from Foursqueare.');
-        locationItem.contact = 'Can\'t get data from Foursqueare.';
+        locationItem.contact = 'Can\'t get data from Foursqueare';
+        locationItem.createMarkerWindow();
+        if (infowindow.marker != locationItem.marker) {
+          infowindow.marker = locationItem.marker;
+          infowindow.setContent(locationItem.windowContent);
+          infowindow.open(map, locationItem.marker);
+          infowindow.addListener('closeclick', function() {
+          infowindow.marker = null;
+        })};
     });
 }
