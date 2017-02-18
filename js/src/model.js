@@ -15,7 +15,7 @@ var locations = [{
     },
     tag: 'Mediterranean',
     visibility: true,
-    content: 'Adam\'s faverate restaruant.'
+    content: 'Adam\'s faverite restaruant.'
 }, {
     title: 'Chia Shiang',
     location: {
