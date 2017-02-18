@@ -1,4 +1,4 @@
-#More than Chinese Resterants in Ann Arbor
+#More than Chinese Restaurant in Ann Arbor
 
 > A [Udacity Front-end Developer Course](https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001) Project
 
@@ -20,7 +20,7 @@ Clone the repo
 
 ## Go to the folder
 
-	$ cd /frontend-nanodegree-feedreader
+	$ cd /A2Map
 
 ## Set up localhost (more details see [here](http://www.linuxjournal.com/content/tech-tip-really-simple-http-server-python))
 
@@ -56,4 +56,10 @@ Then type the following address in your browser:
 
 Thanks to Udacity hard-working mentors, Karol, Sarah_m, etc., reviewers, [Ann Arbor Coffee House Coders](https://www.meetup.com/Ann-Arbor-Coffee-House-Coders) organizer, [Scott Goci](https://github.com/scouttyg) and Chinese Udacity WeChat group Zhilian Dai for your in time help whenever I stuck myself in a corner.
 
+<<<<<<< HEAD
 I finally finished（hopefully) this project at the last night of the third month.
+||||||| merged common ancestors
+I finally finished（hopefully) this project at the last night of the third months.
+=======
+I finally finished（hopefully) this project at the last night of the third month.
+>>>>>>> cd490d15fe02683b9861fe7d000f7f1e85f747eb
