@@ -56,4 +56,4 @@ Then type the following address in your browser:
 
 Thanks to Udacity hard-working mentors, Karol, Sarah_m, etc., reviewers, [Ann Arbor Coffee House Coders](https://www.meetup.com/Ann-Arbor-Coffee-House-Coders) organizer, [Scott Goci](https://github.com/scouttyg) and Chinese Udacity WeChat group Zhilian Dai for your in time help whenever I stuck myself in a corner.
 
-I finally finished（hopefully) this project at the last night of the third month.
+I finally completed this project at the last night of the third month of this Nanodegree. I feel I learned a lot in the past three month: Javascript from 0 to 1, GitHut from 0 to 1, etc. etc.
