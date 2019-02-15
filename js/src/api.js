@@ -10,8 +10,8 @@ function fourSquareInfo(locationItem, infowindow) {
         dataType: "jsonp",
     }).done(function(results) {
         var data = results.response.venues[0];
-        data.contact.formattedPhone !== null ? locationItem.contact = data.contact.formattedPhone : locationItem.contact = 'No data from Foursqueare';
-        data.menu !== null ? locationItem.menu = data.menu.mobileUrl : locationItem.menu = 'https://foursquare.com/';
+        typeof data.contact.formattedPhone !== 'undefined' ? locationItem.contact = data.contact.formattedPhone : locationItem.contact = 'No data from Foursqueare';
+        data.hasMenu === true ? locationItem.menu = data.menu.mobileUrl : locationItem.menu = 'https://foursquare.com/';
         locationItem.createMarkerWindow();
         if (infowindow.marker != locationItem.marker) {
             infowindow.marker = locationItem.marker;
